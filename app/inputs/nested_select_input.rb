@@ -81,7 +81,7 @@ class NestedSelectInput < ActiveAdminAddons::InputBase
 
     attribute_camelized = attribute.to_s.chomp("_id").camelize
     klass_without_namespace = attribute_camelized.safe_constantize
-    klass_with_namespace = "#{@object.class.parent}::#{attribute_camelized}".safe_constantize
+    klass_with_namespace = "#{@object.class.module_parent}::#{attribute_camelized}".safe_constantize
     klass = klass_without_namespace || klass_with_namespace
     klass.find_by_id(attribute_value)
   end
