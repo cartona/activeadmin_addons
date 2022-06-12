@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby '3.0.4'
 
 # Declare your gem's dependencies in activeadmin_ui_addons.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -12,5 +13,5 @@ gemspec
 
 # To use debugger
 # gem "debugger"
-gem "activeadmin", github: "activeadmin"
+gem 'activeadmin', '2.13.1'
 gem "devise"

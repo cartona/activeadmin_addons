@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "aasm"
   s.add_development_dependency "enumerize", "~> 2.0"
   s.add_development_dependency "paperclip"
-  s.add_development_dependency "rails", "~> 4.2"
+  s.add_development_dependency "rails", "~> 6.1.6"
   s.add_development_dependency "sass-rails"
   s.add_development_dependency "sqlite3"
 
