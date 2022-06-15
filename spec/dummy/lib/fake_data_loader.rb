@@ -4,7 +4,6 @@ module FakeDataLoader
   extend DataLoaders
 
   def self.load_data
-    create_admin
     create_categories(5)
     create_items(10)
     create_cities
@@ -19,7 +18,7 @@ module FakeDataLoader
       category: @category3,
       amount: 34000,
       items: [@item1, @item3],
-      legal_date: DateTime.current - 5.days
+      legal_date: Date.current - 5.days
     )
 
     Invoice.create!(
@@ -31,7 +30,7 @@ module FakeDataLoader
       category: @category2,
       amount: 50000,
       items: [@item1, @item4, @item5],
-      legal_date: DateTime.current
+      legal_date: Date.current
     )
   end
 end
