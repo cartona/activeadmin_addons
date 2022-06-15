@@ -215,11 +215,7 @@ Metrics/ClassLength:
   Enabled: false
   CountComments: false
   Max: 100
-<<<<<<< HEAD
 Layout/LineLength:
-=======
-Metrics/LineLength:
->>>>>>> 8c9c70a8baf48039c330ff050689f5047d24823f
   Description: Limit lines to 100 characters.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#100-character-limits
   Enabled: true
@@ -448,11 +444,7 @@ Lint/DeprecatedClassMethods:
 Lint/ElseLayout:
   Description: Check for odd code arrangement in an else block.
   Enabled: false
-<<<<<<< HEAD
 Lint/SuppressedException:
-=======
-Lint/HandleExceptions:
->>>>>>> 8c9c70a8baf48039c330ff050689f5047d24823f
   Description: Don't suppress exception.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions
   Enabled: false
