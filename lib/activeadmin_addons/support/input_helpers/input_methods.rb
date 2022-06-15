@@ -11,6 +11,8 @@ module ActiveAdminAddons
     end
 
     def valid_object
+      raise "blank object given" if @object.blank?
+
       @object
     end
 
@@ -23,8 +25,9 @@ module ActiveAdminAddons
     end
 
     def method_model
-      object_class.try(:reflect_on_association, association_name).try(:klass) ||
-        association_name.classify.safe_constantize || object_class
+      klass_without_namespace = association_name.classify.safe_constantize
+      klass_with_namespace = "#{@object.class.module_parent}::#{association_name.classify}".safe_constantize
+      @options[:method_model] || object_class.reflect_on_association(association_name).try(:klass) || klass_without_namespace || klass_with_namespace
     end
 
     def tableize_method
@@ -39,6 +42,10 @@ module ActiveAdminAddons
 
     def input_value
       @input_value ||= !valid_object.nil? ? valid_object.send(valid_method) : ''
+    end
+
+    def input_association_value
+      @input_association_value ||= valid_object.send(association_name)
     end
 
     def translated_method

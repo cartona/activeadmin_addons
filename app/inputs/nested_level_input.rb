@@ -18,6 +18,7 @@ class NestedLevelInput < ActiveAdminAddons::InputBase
     load_class(@options[:class])
     load_data_attr(:fields, default: opts[:fields], formatter: :to_json)
     load_data_attr(:predicate, default: opts[:predicate])
+    load_data_attr(:filters)
     load_data_attr(:model, value: object_name)
     load_data_attr(:display_name, default: opts[:display_name])
     load_data_attr(:minimum_input_length, default: opts[:minimum_input_length])
