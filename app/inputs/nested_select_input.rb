@@ -79,11 +79,15 @@ class NestedSelectInput < ActiveAdminAddons::InputBase
     attribute_value = @object.send(attribute)
     return unless attribute_value
 
-    attribute_camelized = attribute.to_s.chomp("_id").camelize
-    klass_without_namespace = attribute_camelized.safe_constantize
-    klass_with_namespace = "#{@object.class.parent}::#{attribute_camelized}".safe_constantize
-    klass = klass_without_namespace || klass_with_namespace
-    klass.find_by_id(attribute_value)
+    klass = class_from_attribute(attribute)
+    klass.find_by(id: attribute_value)
+  end
+
+  def class_from_attribute(attribute)
+    association_name = attribute.to_s.chomp("_id")
+    association_name.camelize.constantize
+  rescue NameError
+    object_class.reflect_on_association(association_name).klass
   end
 
   def build_virtual_attr(attribute_name)

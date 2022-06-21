@@ -7,8 +7,13 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/public/system
+spec/dummy/public/packs-test
+spec/dummy/public/packs
 .gem
 .gemtags
 .tags
 .tags_sorted_by_file
 .vscode/settings.json
+vendor/bundle
+node_modules
+src

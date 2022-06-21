@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby '3.0.4'
 
 # Declare your gem's dependencies in activeadmin_ui_addons.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -12,5 +13,7 @@ gemspec
 
 # To use debugger
 # gem "debugger"
-gem "activeadmin", github: "activeadmin"
-gem "devise"
+gem 'activeadmin', '2.13.1'
+gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
+
+gem "webpacker", "~> 5.0", require: ENV["SPROCKETS"] != "true"

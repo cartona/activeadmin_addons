@@ -1,6 +1,5 @@
 # ActiveAdmin Addons
 [![Gem Version](https://badge.fury.io/rb/activeadmin_addons.svg)](https://badge.fury.io/rb/activeadmin_addons)
-[![Build Status](https://secure.travis-ci.org/platanus/activeadmin_addons.svg?branch=master)](http://travis-ci.org/platanus/activeadmin_addons)
 
 ActiveAdmin Addons will extend your ActiveAdmin and enable a set of addons you can optionally use to improve the ActiveAdmin UI and make it awesome.
 
@@ -30,6 +29,7 @@ ActiveAdmin Addons will extend your ActiveAdmin and enable a set of addons you c
 #### Filters
 
 - [Numeric Range Filter](#numeric-range-filter): filter your results using a numeric range (i.e. age between 18-30).
+- [Date Time Picker Filter](#date-time-picker-filter): filter your results using a datetime range.
 - [Search Select Filter](#search-select-filter): filter your results using the ajax select input.
 
 #### Themes
@@ -78,13 +78,13 @@ Displays a paperclip link with attachment related icon into index and show views
 
 [Read more!](docs/paperclip_attachment.md)
 
-#### Paperclip Image
+#### Images
 
-Displays a paperclip image into index and show views
+Display images in the index and show views. This implementation supports [Shrine](https://github.com/shrinerb/shrine) and [Paperclip](https://github.com/thoughtbot/paperclip).
 
 <img src="./docs/images/paperclip-image-column.png" height="380" />
 
-[Read more!](docs/paperclip_images.md)
+[Read more!](docs/images.md)
 
 #### AASM Integration
 
@@ -212,6 +212,16 @@ filter :number, as: :numeric_range_filter
 
 <img src="./docs/images/filter-range.png" height="150" />
 
+#### Date Time Picker Filter
+
+To filter based on a range of datetimes you can use `date_time_picker_filter` like this:
+
+```ruby
+filter :created_at, as: :date_time_picker_filter
+```
+
+<img src="./docs/images/data-time-picker-range.png" height="150" />
+
 #### Search Select Filter
 
 You can use the ajax select input to filter values on index view like this:
@@ -228,6 +238,8 @@ filter :category_id, as: :search_select_filter
 Use default active_admin theme.
 
 #### Material Theme
+##### Not compatible when Active Admin has been installed in webpack mode
+
 Show material design theme using [active_material](https://github.com/vigetlabs/active_material). If you want to use it, you should run the generator using the flag `theme` as follow:
 
 ```ruby
@@ -247,13 +259,25 @@ Take care of defining these variables before the import of `@import 'activeadmin
 
 For material documentation you should go to [gem documentation](http://code.viget.com/active_material/docs/api/).
 
+## Publishing
+
+On master/main branch...
+
+1. Change `VERSION` in `lib/activeadmin_addons/version.rb`.
+2. Change `Unreleased` title to current version in `CHANGELOG.md`.
+3. Run `bundle install`.
+4. Commit new release. For example: `Releasing v1.0.0`.
+5. Create tag. For example: `git tag v1.0.0`.
+6. Push tag. For example: `git push origin v1.0.0`.
+
 ## Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+3. If you changed the javascript/scss files, run `yarn build`.
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create new Pull Request
 
 If you want to collaborate, please check [the rules](docs/CONTRIBUTING.md) first.
 
@@ -267,4 +291,4 @@ activeadmin_addons is maintained by [platanus](http://platan.us).
 
 ## License
 
-ActiveAdminAddons is © 2016 Platanus, spa. It is free software and may be redistributed under the terms specified in the LICENSE file.
+ActiveAdminAddons is © 2021 Platanus, spa. It is free software and may be redistributed under the terms specified in the LICENSE file.

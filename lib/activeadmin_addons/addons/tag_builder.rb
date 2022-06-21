@@ -46,7 +46,7 @@ module ActiveAdminAddons
         'data-model' => class_name,
         'data-object_id' => model.id,
         'data-field' => attribute,
-        'data-url' => context.resource_path(model),
+        'data-url' => resource_url,
         'data-value' => data
       }
     end

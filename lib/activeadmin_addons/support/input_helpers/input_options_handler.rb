@@ -65,7 +65,7 @@ module ActiveAdminAddons
     def load_option_attr(attr_name, options)
       value = calculate_attr_value(attr_name, options)
       item = { value: value }
-      item[:formatter] = options[:formatter] unless options[:formatter].blank?
+      item[:formatter] = options[:formatter] if options[:formatter].present?
       item
     end
 

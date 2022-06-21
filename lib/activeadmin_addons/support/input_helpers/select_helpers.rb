@@ -67,15 +67,21 @@ module ActiveAdminAddons
     end
 
     def selected_item
-      @selected_item ||= selected_collection.first
+      @selected_item ||= begin
+                           input_association_value
+                         rescue NoMethodError
+                           selected_collection.first
+                         end
     end
 
     private
 
     def active_record_relation?(value)
       klass = value.class.name
-      klass == "ActiveRecord::Relation" ||
-        klass == "ActiveRecord::Associations::CollectionProxy"
+      [
+        "ActiveRecord::Relation",
+        "ActiveRecord::Associations::CollectionProxy"
+      ].include?(klass)
     end
 
     def valid_options
