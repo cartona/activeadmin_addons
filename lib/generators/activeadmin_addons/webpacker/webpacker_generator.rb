@@ -11,20 +11,17 @@ module ActiveadminAddons
       def add_stylesheets
         file_path = 'app/javascript/stylesheets/active_admin.scss'
 
-        begin
-          prepend_file(file_path, css_assets)
-        end
+        prepend_file(file_path, css_assets)
       end
 
       def install_package
-        run "yarn add activeadmin_addons"
+        run "yarn add activeadmin_addons@beta"
       end
 
       private
 
       def js_assets
-        to_add = "import \"activeadmin_addons\"\n"
-        to_add
+        "import \"activeadmin_addons\"\n"
       end
 
       def css_assets

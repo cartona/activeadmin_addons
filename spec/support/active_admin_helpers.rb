@@ -54,7 +54,7 @@ module ActiveAdminHelpers
     return unless _show_routes
 
     Rails.application.routes.routes.each do |route|
-      puts route.path.spec.to_s
+      puts route.path.spec
     end
   end
 
@@ -74,7 +74,7 @@ module ActiveAdminHelpers
       # it allover the place
       ActiveAdmin.application.authentication_method = false
       ActiveAdmin.application.current_user_method = false
-      ActiveAdmin.application.use_webpacker = ENV["SPROCKETS"] != "true"
+      ActiveAdmin.application.use_webpacker = true
     end
 
     yield

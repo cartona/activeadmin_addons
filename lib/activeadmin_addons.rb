@@ -6,7 +6,7 @@ module ActiveadminAddons
               :default_nested_level_options, :default_tel_options
 
   def default_select
-    return 'select2' unless @default_select
+    return "slim-select" unless @default_select
 
     @default_select
   end
@@ -18,7 +18,7 @@ module ActiveadminAddons
   end
 
   def datetime_picker_input_format
-    return '%Y-%m-%d %H:%M' unless @datetime_picker_input_format
+    return "%Y-%m-%d %H:%M" unless @datetime_picker_input_format
 
     @datetime_picker_input_format
   end

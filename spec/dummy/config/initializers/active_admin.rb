@@ -303,7 +303,7 @@ ActiveAdmin.setup do |config|
   #    :title,
   #    :email,
   #  ]
-  # config.filter_method_for_large_association, '_starts_with'
+  # config.filter_method_for_large_association, '_start'
 
   # == Head
   #
@@ -331,5 +331,5 @@ ActiveAdmin.setup do |config|
   # By default, Active Admin uses Sprocket's asset pipeline.
   # You can switch to using Webpacker here.
   #
-  config.use_webpacker = ENV["SPROCKETS"] != "true"
+  config.use_webpacker = true
 end

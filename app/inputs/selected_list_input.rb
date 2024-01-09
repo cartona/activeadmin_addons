@@ -11,11 +11,11 @@ class SelectedListInput < ActiveAdminAddons::InputBase
     load_data_attr(:method, value: method)
     load_data_attr(:url, default: url_from_method)
     load_data_attr(:response_root, default: tableize_method)
-    load_data_attr(:fields, default: opts[:fields], formatter: :to_json)
-    load_data_attr(:predicate, default: opts[:predicate])
-    load_data_attr(:display_name, default: opts[:display_name])
-    load_data_attr(:minimum_input_length, default: opts[:minimum_input_length])
-    load_data_attr(:width, default: opts[:width])
+    load_data_attr(:fields, default: ["name"], formatter: :to_json)
+    load_data_attr(:predicate, default: "cont")
+    load_data_attr(:display_name, default: "name")
+    load_data_attr(:minimum_input_length, default: 1)
+    load_data_attr(:width, default: "100%")
     load_data_attr(
       :order,
       value: @options[:order_by],

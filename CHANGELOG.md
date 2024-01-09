@@ -4,6 +4,48 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Unreleased
 
+### 2.0.0.beta-3
+
+#### Added
+
+* Add Ruby 3.2 support [#474](https://github.com/platanus/activeadmin_addons/pull/474)
+* Add ActiveAdmin v3 support [#477](https://github.com/platanus/activeadmin_addons/pull/477)
+  * Note that changes made should be backwards compatible with ActiveAdmin 2.x, so this is not a breaking change
+
+### 2.0.0.beta-2
+
+#### Breaking changes
+* Defines required ruby version to >=2.7.0 [#460](https://github.com/platanus/activeadmin_addons/pull/460)
+* Nested and search select now use the name of the association instead of the name of id [#462](https://github.com/platanus/activeadmin_addons/pull/462)
+* Tags input now returns an array of strings instead of a string [#469](https://github.com/platanus/activeadmin_addons/pull/469)
+
+#### Fixes
+* Include only items that belong to parent when using collection option in a nested input level [#463](https://github.com/platanus/activeadmin_addons/pull/463)
+
+### 2.0.0.beta-1
+
+Skipped
+
+### 2.0.0.beta-0
+
+#### Breaking changes
+* Replaces [Select2](https://select2.org/) with [Slim Select](https://slimselectjs.com/) to make it easier to work with newer bundlers like esbuild [#448](https://github.com/platanus/activeadmin_addons/pull/448)
+* Removes support for Paperclip since it has been deprecated. [#450](https://github.com/platanus/activeadmin_addons/pull/450)
+* Removes support for enumerize [#452](https://github.com/platanus/activeadmin_addons/pull/452)
+* Removes support for the Sprockets installation of ActiveAdmin [#451](https://github.com/platanus/activeadmin_addons/pull/451)
+
+### 1.10.1
+
+* Backport [#477](https://github.com/platanus/activeadmin_addons/pull/477) to have ActiveAdmin v3 compatibility [#479](https://github.com/platanus/activeadmin_addons/pull/479)
+
+### 1.10.0
+
+#### Added
+
+* Added Shrine support for image row and column [#396](https://github.com/platanus/activeadmin_addons/pull/396)
+* Added Markdown row and column [#409](https://github.com/platanus/activeadmin_addons/pull/409)
+* Added translation support for Rails built-in enums in select filters and tag column/row [#442](https://github.com/platanus/activeadmin_addons/pull/442)
+
 ### 1.9.0
 
 ##### Changed

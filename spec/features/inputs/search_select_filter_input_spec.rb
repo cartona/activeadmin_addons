@@ -10,7 +10,7 @@ describe "Search Select Filter Input", type: :feature do
   context "with initial state" do
     before do
       register_page(City, false) do
-        filter :region_id, as: :search_select_filter
+        filter :region, as: :search_select_filter
       end
 
       visit admin_cities_path
@@ -32,7 +32,7 @@ describe "Search Select Filter Input", type: :feature do
 
     context "setting value", js: true do
       before do
-        pick_select2_entered_option("Metropolitana")
+        pick_slimselect_entered_option("Metropolitana")
         click_filter_btn
       end
 

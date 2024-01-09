@@ -1,32 +1,22 @@
-require 'enumerize'
-require 'paperclip'
 require 'aasm'
 
 class Invoice < ActiveRecord::Base
-  extend ::Enumerize
-  include Paperclip::Glue
   include AASM
   include ImageUploader::Attachment(:picture)
+  after_initialize :set_default_state, if: :new_record?
 
   belongs_to :category
   belongs_to :city
   has_and_belongs_to_many :items
   has_and_belongs_to_many :other_items, class_name: 'Item'
 
-  enumerize :state, in: [:pending, :rejected, :approved], default: :pending
-
-  enum status: { active: 0, archived: 1 }
-
-  has_attached_file :attachment
-  validates_attachment :attachment, content_type: { content_type: "application/pdf" }
-
-  has_attached_file :photo, styles: {
-    big: "600x600>",
-    medium: "300x300>",
-    thumb: "100x100>"
+  enum state: {
+    pending: 'pending',
+    rejected: 'rejected',
+    approved: 'approved'
   }
 
-  validates_attachment :photo, content_type: { content_type: %r{\Aimage\/.*\Z} }
+  enum status: { active: 0, archived: 1 }
 
   # Uncomment to test validations
   # validates :city, :city_id, :category, :category_id, :updated_at, :number, :item_ids, :color,
@@ -97,5 +87,23 @@ class Invoice < ActiveRecord::Base
       "#C2B400",
       "#B9BF00"
     ]
+  end
+
+  def set_default_state
+    self.state ||= 'pending'
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    [
+      "aasm_state", "active", "amount", "attachment_content_type", "attachment_file_name",
+      "attachment_file_size", "attachment_updated_at", "category_id", "city_id", "client_id",
+      "color", "created_at", "description", "id", "legal_date", "number", "paid",
+      "photo_content_type", "photo_file_name", "photo_file_size", "photo_updated_at",
+      "picture_data", "position", "shipping_status", "state", "status", "updated_at"
+    ]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ["category", "city", "items", "other_items"]
   end
 end

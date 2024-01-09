@@ -11,10 +11,12 @@ describe "Tags Input", type: :feature do
     end
 
     it "adds new tags", js: true do
-      pick_select2_entered_option("value 1")
-      expect_select2_choices_count_to_eq(1)
-      pick_select2_entered_option("value 2")
-      expect_select2_choices_count_to_eq(2)
+      add_slimselect_option("value 1")
+      open_slimselect_options
+      expect_slimselect_options_count_to_eq(1)
+      add_slimselect_option("value 2")
+      open_slimselect_options
+      expect_slimselect_options_count_to_eq(2)
     end
   end
 
@@ -28,11 +30,11 @@ describe "Tags Input", type: :feature do
     end
 
     it "adds new tags", js: true do
-      expect_select2_options_count_to_eq(3)
+      expect_slimselect_options_count_to_eq(3)
     end
   end
 
-  context "working with active record relations" do
+  context "when working with active record relations" do
     before do
       register_form(Invoice) do |f|
         f.input :item_ids, as: :tags, collection: Item.all
@@ -43,30 +45,32 @@ describe "Tags Input", type: :feature do
     end
 
     it "shows preloaded items", js: true do
-      expect_select2_options_count_to_eq(3)
+      expect_slimselect_options_count_to_eq(3)
     end
 
     context "with added item" do
-      before { pick_select2_entered_option(@item1.name) }
+      before { pick_slimselect_entered_option(@item1.name) }
 
-      it "adds/removes hidden item", js: true do
-        item_id = "#invoice_item_ids_#{@item1.id}"
-        input = find(item_id, visible: false)
-        expect(input.value).to eq(@item1.id.to_s)
-        expect(input[:name]).to eq("invoice[item_ids][]")
-        find(".select2-selection__choice__remove").click
-        expect { find(item_id, visible: false) }.to raise_error(Capybara::ElementNotFound)
+      it "includes and then removes item from select value", js: true do
+        select_selector = "select[name='invoice[item_ids][]']"
+        expect(find(select_selector, visible: false).value).to include(@item1.id.to_s)
+        find(".ss-value-delete").click
+        sleep 0.5
+        expect(find(select_selector, visible: false).value).not_to include(@item1.id.to_s)
       end
 
       it "does not allow new items", js: true do
-        expect_select2_choices_count_to_eq(1)
-        fill_select2_input_and_press_return("Not preloaded item")
-        expect_select2_choices_count_to_eq(1)
+        expect_slimselect_options_count_to_eq(3)
+        expect do
+          add_slimselect_option("Not preloaded item")
+        end.to raise_error(Capybara::ElementNotFound)
+        slimselect_element.send_keys(:escape)
+        expect_slimselect_options_count_to_eq(3)
       end
     end
   end
 
-  context "working with active record relations but alias" do
+  context "when working with active record relations but alias" do
     before do
       register_form(Invoice) do |f|
         f.input :other_item_ids, as: :tags, collection: Item.all
@@ -77,19 +81,18 @@ describe "Tags Input", type: :feature do
     end
 
     it "shows preloaded items", js: true do
-      expect_select2_options_count_to_eq(3)
+      expect_slimselect_options_count_to_eq(3)
     end
 
     context "with added item" do
-      before { pick_select2_entered_option(@item1.name) }
+      before { pick_slimselect_entered_option(@item1.name) }
 
-      it "adds/removes hidden item", js: true do
-        item_id = "#invoice_other_item_ids_#{@item1.id}"
-        input = find(item_id, visible: false)
-        expect(input.value).to eq(@item1.id.to_s)
-        expect(input[:name]).to eq("invoice[other_item_ids][]")
-        find(".select2-selection__choice__remove").click
-        expect { find(item_id, visible: false) }.to raise_error(Capybara::ElementNotFound)
+      it "includes and then removes item from select value", js: true do
+        select_selector = "select[name='invoice[other_item_ids][]']"
+        expect(find(select_selector, visible: false).value).to include(@item1.id.to_s)
+        find(".ss-value-delete").click
+        sleep 0.5
+        expect(find(select_selector, visible: false).value).not_to include(@item1.id.to_s)
       end
     end
   end
